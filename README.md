@@ -6,3 +6,14 @@ A Spring Boot and React based College Admission Management System with student r
 The following diagram shows the high-level architecture of the system:
 
 ![System Architecture Diagram](docs/system-architecture.jpg)
+
+## 🗃️ Database Schema (ERD)
+
+The Entity Relationship Diagram below shows the structure of the application's database.
+
+![Database ERD](docs/database-erd.png)
+
+**Tables:**
+- **student:** Stores student personal information.
+- **application:** Records each application a student submits.
+- **course:** Contains the available courses for admission.
