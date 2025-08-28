@@ -20,26 +20,30 @@ The Entity Relationship Diagram below shows the structure of the application's d
 
 ## 🖥️ User Interface (Screenshots)
 
-### Student Portal
+Here's a walkthrough of the main features and interfaces of the College Admission Management System.
 
-#### Dashboard
-The main hub for students after logging in.
+### For Students & Applicants
+
+#### 1. Login Page
+A clean and secure login interface for both students and administrators.
+![Login Page](docs/ui/login-page.png)
+
+#### 2. Student Registration
+The form for new students to create an account and join the platform.
+![Student Registration](docs/ui/student-registration.png)
+
+#### 3. Student Dashboard
+The personalized hub for students, providing an overview of their application status and quick access to all features.
 ![Student Dashboard](docs/ui/student-dashboard.png)
 
-#### Application Form
-The form for submitting a new admission application.
-![Application Form](docs/ui/application-form.png)
+---
 
-#### Application Status
-View the current status of all submitted applications.
-![Application Status](docs/ui/application-status.png)
+### For Administrators
 
-### Admin Portal
-
-#### Dashboard
-The main hub for administrators to manage the system.
+#### 4. Admin Dashboard
+The admin control center, offering a high-level snapshot of institutional activity, including pending applications, revenue, and total students.
 ![Admin Dashboard](docs/ui/admin-dashboard.png)
 
-#### Manage Applications
-View and update the status of all student applications.
-![Manage Applications](docs/ui/admin-applications-list.png)
+#### 5. Course Management
+The interface where administrators can view, add, edit, and manage all courses offered by the institution.
+![Course Management](docs/ui/course-management.png)
