@@ -1,0 +1,114 @@
+.view-courses-container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.courses-header {
+    margin-bottom: 2rem;
+}
+
+.courses-header h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.courses-header p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+/* --- IDE KOTHA STYLE --- */
+.info-banner {
+    background-color: #e0f2fe; /* Light blue background */
+    color: #0c5460; /* Dark blue text */
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 1px solid #b8daff;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 1px solid #f5c6cb;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.course-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+.course-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    min-height: 55px;
+}
+
+.course-details p {
+    margin: 0.5rem 0;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.course-details p strong {
+    color: var(--text-dark);
+}
+
+.card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background-color: #f9fafb;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.apply-now-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.apply-now-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+/* Button ni disable chesinappudu, ee style apply avutundi */
+.apply-now-btn:disabled {
+    background-color: #9ca3af; /* Gray color */
+    cursor: not-allowed;
+}

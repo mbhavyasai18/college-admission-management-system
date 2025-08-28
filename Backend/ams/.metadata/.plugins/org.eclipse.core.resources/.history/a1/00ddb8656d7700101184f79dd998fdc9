@@ -1,0 +1,89 @@
+package com.cognizant.ams.Model.DAO.ServiceImpl;
+
+import com.cognizant.ams.Model.BAO.FeeInstallmentDTO;
+import com.cognizant.ams.Model.BAO.FeePaymentDTO;
+import com.cognizant.ams.Model.BAO.FeeSummaryDTO;
+import com.cognizant.ams.Model.DAO.Services.FeesService;
+import com.cognizant.ams.Model.Exceptions.FeeRecordNotFoundException;
+import com.cognizant.ams.Model.POJO.FeesDetails;
+import com.cognizant.ams.Model.POJO.StudentRegistration;
+import com.cognizant.ams.Model.Repositories.FeesDetailsRepository;
+import com.cognizant.ams.Model.Repositories.StudentRegistrationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate; // Import LocalDate
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Service
+public class FeesServiceImpl implements FeesService {
+
+    @Autowired
+    private FeesDetailsRepository feesRepo;
+
+    @Autowired
+    private StudentRegistrationRepository studentRepo;
+
+    @Override
+    public FeeSummaryDTO getFeeSummary(String studentID) {
+        StudentRegistration student = studentRepo.findById(studentID)
+                .orElseThrow(() -> new FeeRecordNotFoundException("Student not found with ID: " + studentID));
+
+        List<FeesDetails> feesList = feesRepo.findByStudentRegistration_StudentID(studentID);
+        int totalPaid = feesList.stream().mapToInt(FeesDetails::getPaidAmount).sum();
+        int totalDue = student.getCourse().getTotalFees() - totalPaid;
+
+        List<FeeInstallmentDTO> installments = feesList.stream()
+                .map(f -> new FeeInstallmentDTO(
+                        f.getFeeID(),
+                        f.getInstallmentNo(),
+                        f.getPaidAmount(),
+                        f.getPaymentDate()
+                ))
+                .collect(Collectors.toList());
+
+        return new FeeSummaryDTO(studentID, totalPaid, totalDue, installments);
+    }
+
+    @Override
+    public FeeSummaryDTO payInstallment(FeePaymentDTO dto) {
+        // 1. Fetch student to get course and total fee details
+        StudentRegistration student = studentRepo.findById(dto.getStudentID())
+                .orElseThrow(() -> new FeeRecordNotFoundException("Student not found with ID: " + dto.getStudentID()));
+
+        // 2. Calculate total amount paid *before* this transaction
+        int totalPaidPreviously = feesRepo.findByStudentRegistration_StudentID(dto.getStudentID())
+                .stream()
+                .mapToInt(FeesDetails::getPaidAmount)
+                .sum();
+
+        // 3. Get total course fee and calculate the new remaining fee
+        int totalCourseFee = student.getCourse().getTotalFees();
+        int remainingFeeAfterPayment = totalCourseFee - (totalPaidPreviously + dto.getPaidAmount());
+
+        // 4. Generate a unique FeeID
+        String feeID = "FEE-" + dto.getStudentID() + "-I" + dto.getInstallmentNo()
+                     + "-" + UUID.randomUUID().toString().substring(0, 4).toUpperCase();
+
+        // 5. Create and populate the new fee details record
+        FeesDetails fee = new FeesDetails();
+        fee.setFeeID(feeID);
+        fee.setInstallmentNo(dto.getInstallmentNo());
+        fee.setPaidAmount(dto.getPaidAmount());
+        
+        // --- THIS IS THE FIX ---
+        // The payment date is now set to the current server date automatically.
+        fee.setPaymentDate(LocalDate.now());
+        
+        fee.setRemainingFee(remainingFeeAfterPayment); // Set the calculated remaining fee
+        fee.setStudentRegistration(student);
+
+        // 6. Save the new fee record
+        feesRepo.save(fee);
+
+        // 7. Return an updated summary of all fees for the student
+        return getFeeSummary(dto.getStudentID());
+    }
+}

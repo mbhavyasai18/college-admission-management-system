@@ -22,3 +22,27 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+
+
+# Dependency directories
+node_modules/
+/FrontEnd/ams/dist/
+
+# IDE and OS files
+.vscode/
+.idea/
+.metadata/
+*.DS_Store
+
+# Build output
+/Backend/ams/ams/target/
+/Backend/api-gateway/target/
+/Backend/discovery-service/target/
+/Backend/userauth-services/userauth-services/target/
+
+# Log files
+*.log
+
+# Environment variables
+.env

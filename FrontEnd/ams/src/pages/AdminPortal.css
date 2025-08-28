@@ -1,0 +1,59 @@
+:root {
+    --admin-primary: #0d6efd;
+    --admin-primary-hover: #0b5ed7;
+    --admin-sidebar-bg: #212529;
+    --admin-sidebar-text: #adb5bd;
+    --admin-sidebar-active-text: #ffffff;
+    --admin-sidebar-active-bg: rgba(13, 110, 253, 0.2);
+    --admin-main-bg: #f8f9fa;
+    --admin-text-dark: #212529;
+    --admin-text-light: #6c757d;
+    --admin-border-color: #dee2e6;
+}
+
+.admin-portal-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--admin-main-bg);
+}
+
+.admin-sidebar {
+    width: 260px;
+    background-color: var(--admin-sidebar-bg);
+    color: var(--admin-sidebar-text);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+}
+
+.admin-sidebar-header { margin-bottom: 2rem; text-align: center; }
+.admin-sidebar-header h2 { font-size: 1.5rem; color: var(--admin-sidebar-active-text); font-weight: 600; }
+
+.admin-sidebar-nav { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+.admin-sidebar-nav li {
+    display: flex; align-items: center; padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem; border-radius: 8px; cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+.admin-sidebar-nav li:hover { background-color: var(--admin-sidebar-active-bg); color: var(--admin-sidebar-active-text); }
+.admin-sidebar-nav li.active {
+    background-color: var(--admin-primary);
+    color: var(--admin-sidebar-active-text);
+    font-weight: 500;
+}
+.admin-sidebar-nav li svg { width: 24px; height: 24px; margin-right: 1rem; fill: currentColor; }
+
+.admin-sidebar-footer { padding-top: 1rem; border-top: 1px solid #343a40; }
+.admin-logout-btn {
+    display: flex; align-items: center; width: 100%;
+    padding: 0.8rem 1rem; background: none; border: none;
+    color: var(--admin-sidebar-text); font-size: 1rem; text-align: left;
+    border-radius: 8px; cursor: pointer;
+}
+.admin-logout-btn:hover { background-color: rgba(220, 53, 69, 0.1); color: #dc3545; }
+.admin-logout-btn svg { width: 24px; height: 24px; margin-right: 1rem; fill: currentColor; }
+
+.admin-main-content { flex-grow: 1; padding: 2rem; overflow-y: auto; }

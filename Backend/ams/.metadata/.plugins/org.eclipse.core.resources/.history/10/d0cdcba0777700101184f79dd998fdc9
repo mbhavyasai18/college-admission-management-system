@@ -1,0 +1,62 @@
+package com.cognizant.ams.Model.DAO.ServiceImpl;
+
+import com.cognizant.ams.Model.BAO.StudentRegistrationDTO;
+import com.cognizant.ams.Model.BAO.StudentRegisterResponse;
+import com.cognizant.ams.Model.DAO.Services.StudentRegistrationService;
+import com.cognizant.ams.Model.POJO.*;
+import com.cognizant.ams.Model.Repositories.CourseMasterRepository;
+import com.cognizant.ams.Model.Repositories.StudentRegistrationRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+// PasswordEncoder import ni teesi veyandi
+import org.springframework.stereotype.Service;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Service
+public class StudentRegistrationServiceImpl implements StudentRegistrationService {
+
+    @Autowired
+    private StudentRegistrationRepository studentRepo;
+
+    @Autowired
+    private CourseMasterRepository courseRepo;
+
+    // PasswordEncoder injection ni teesi veyandi
+
+    @Override
+    public StudentRegisterResponse registerStudent(StudentRegistrationDTO dto) {
+        CourseMaster course = courseRepo.findById(dto.getCourseID())
+                .orElseThrow(() -> new EntityNotFoundException("Course not found with ID: " + dto.getCourseID()));
+
+        String studentId = "STU-" + UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+
+        UserLogin newUser = new UserLogin();
+        newUser.setUserID(studentId);
+        newUser.setUsername(dto.getEmail());
+        
+        // --- IDHE FINAL FIX ---
+        // Password ni direct ga plain text la save cheddam
+        newUser.setPassword("defaultPass123"); 
+        
+        newUser.setRole("Student");
+
+        StudentRegistration student = new StudentRegistration();
+        student.setStudentID(studentId);
+        student.setFirstName(dto.getFirstName());
+        // ... (migata student details) ...
+        student.setUserLogin(newUser);
+
+        AdmissionStatus status = new AdmissionStatus();
+        status.setStudentID(studentId);
+        // ... (migata status details) ...
+        student.setAdmissionStatus(status);
+
+        studentRepo.save(student);
+
+        return new StudentRegisterResponse(studentId, dto.getEmail(), "defaultPass123");
+    }
+    // ... (migata methods same ga untayi)
+}

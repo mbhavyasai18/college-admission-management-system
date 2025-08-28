@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+:root {
+    --text-primary-light: #111827;
+    --text-secondary-light: #374151;
+    --bg-light: #ffffff;
+    --bg-outer-light: #f9fafb;
+    --toggle-bg-light: #f3f4f6;
+    --border-light: #e5e7eb;
+}
+
+/* Main container */
+.registration-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: var(--bg-outer-light);
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* Card */
+.registration-card {
+    width: 100%;
+    max-width: 700px;
+    padding: 2rem 2.5rem;
+    background: var(--bg-light);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: popIn 0.5s ease-out;
+    margin: 2rem 0;
+}
+
+/* Header */
+.registration-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.registration-header h2 {
+    font-size: 1.8rem;
+    color: var(--text-primary-light);
+}
+.registration-header p {
+    color: var(--text-secondary-light);
+}
+
+/* Floating label form groups */
+.registration-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+.registration-form .form-row .form-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Floating label container */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 1rem 1rem 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    background-color: var(--toggle-bg-light);
+    font-size: 1rem;
+    color: var(--text-primary-light);
+}
+.form-group label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: #777;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+/* Move label up when focused or input has value */
+.form-group input:focus + label,
+.form-group select:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:not(:placeholder-shown) + label {
+    top: -0.5rem;
+    left: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-primary-light);
+    background: var(--bg-light);
+    padding: 0 0.25rem;
+}
+
+/* Dropdown options */
+.registration-form .form-group select option {
+    background: #fff;
+    color: #000;
+}
+
+/* Actions */
+.registration-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-light);
+}
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary-light);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+.submit-btn {
+    background-color: #4f46e5;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.submit-btn:disabled {
+    background-color: #a5b4fc;
+    cursor: not-allowed;
+}
+
+/* Error message */
+.error-message {
+    color: #ef4444;
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+/* --- SUCCESS CARD STYLES --- */
+.registration-success-card {
+    text-align: center;
+    white-space: pre-line;
+    animation: popIn 0.5s ease-out;
+}
+
+.registration-success-card h2 {
+    font-size: 2rem;
+    color: #16a34a;
+    margin-bottom: 1rem;
+}
+
+.registration-success-card > p {
+    font-size: 1.1rem;
+    color: var(--text-secondary-light);
+}
+
+/* Credentials section */
+.credentials-display {
+    background-color: #f0fdf4;
+    border: 1px dashed #86efac;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.credentials-display p {
+    font-size: 1.1rem;
+    margin: 0.75rem 0;
+    color: var(--text-secondary-light);
+}
+
+.credentials-display p strong {
+    color: var(--text-primary-light);
+    display: inline-block;
+    width: 120px;
+}
+
+/* Animation */
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

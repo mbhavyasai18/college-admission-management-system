@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\mbhav\CognizantProjects\ams\ams"/>
+			<item value="C:\Users\mbhav\CognizantProjects\userauth-services\userauth-services"/>
+			<item value="C:\Users\mbhav\Desktop\Cognizant\CollegeRegistrationApp"/>
+			<item value="C:\Users\mbhav\Desktop\Cgnznt\College-Management-System-master"/>
+			<item value="C:\Users\mbhav\Desktop\Cgnznt\userauth-services\userauth-services"/>
+			<item value="C:\Users\mbhav\CognizantProjects\api-gateway"/>
+			<item value="C:\Users\mbhav\CognizantProjects\API-gateway\API-gateway"/>
+			<item value="C:\Users\mbhav\CognizantProjects\discovery-service"/>
+			<item value="C:\Users\mbhav\git\college-admission-management_ttp1dejr2503_team5"/>
+			<item value="C:\Users\mbhav\ams"/>
+		</list>
+		<section name="SmartImportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="446"/>
+			<item key="DIALOG_Y_ORIGIN" value="71"/>
+			<item key="DIALOG_WIDTH" value="891"/>
+			<item key="DIALOG_HEIGHT" value="646"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.6|0|WINDOWS|1|-16|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+</section>

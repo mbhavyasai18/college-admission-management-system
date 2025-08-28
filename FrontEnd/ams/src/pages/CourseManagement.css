@@ -1,0 +1,201 @@
+.course-management-container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.course-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--admin-text-dark);
+}
+
+.add-new-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--admin-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-new-btn:hover {
+    background-color: var(--admin-primary-hover);
+}
+
+.courses-table-container {
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--admin-border-color);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    overflow-x: auto;
+}
+
+.courses-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.courses-table th, .courses-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+}
+
+.courses-table thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid var(--admin-border-color);
+}
+
+.courses-table th {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--admin-text-light);
+    text-transform: uppercase;
+}
+
+.courses-table tbody tr:not(:last-child) {
+    border-bottom: 1px solid var(--admin-border-color);
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.action-btn svg { width: 20px; height: 20px; fill: currentColor; }
+.edit-btn { color: #0d6efd; }
+.edit-btn:hover { background-color: rgba(13, 110, 253, 0.1); }
+.delete-btn { color: #dc3545; }
+.delete-btn:hover { background-color: rgba(220, 53, 69, 0.1); }
+
+/* --- Modal & Form Styles --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000; animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: #fff; border-radius: 12px;
+    width: 90%; max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.5rem; border-bottom: 1px solid var(--admin-border-color);
+}
+
+.modal-header h2 { font-size: 1.25rem; color: var(--admin-text-dark); }
+
+.close-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 0.5rem; border-radius: 50%;
+    transition: background-color 0.2s;
+}
+.close-btn:hover { background-color: #f1f1f1; }
+.close-btn svg { width: 24px; height: 24px; color: var(--admin-text-light); }
+
+.course-form { padding: 1.5rem; }
+
+/* --- THIS IS THE FIX FOR THE OVERLAPPING TEXT --- */
+.course-form .form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.course-form input {
+    width: 100%;
+    padding: 1rem 0.75rem 0.5rem; /* Add padding for the label */
+    border: 1px solid var(--admin-border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+
+.course-form label {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    color: var(--admin-text-light);
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+}
+
+.course-form input:focus {
+    outline: none;
+    border-color: var(--admin-primary);
+}
+
+/* When the input is focused or has a value, move the label up */
+.course-form input:focus + label,
+.course-form input:not(:placeholder-shown) + label {
+    top: -0.5rem;
+    left: 0.6rem;
+    font-size: 0.75rem;
+    color: var(--admin-primary);
+    background-color: #fff;
+    padding: 0 0.25rem;
+}
+/* --- END OF FIX --- */
+
+.form-actions {
+    display: flex; justify-content: flex-end; gap: 1rem;
+    padding-top: 1rem; margin-top: 1.5rem;
+    border-top: 1px solid var(--admin-border-color);
+}
+
+.cancel-btn, .save-btn {
+    padding: 0.75rem 1.5rem; border: none; border-radius: 8px;
+    font-size: 1rem; font-weight: 500; cursor: pointer;
+    transition: background-color 0.3s;
+}
+/* ... (all other styles remain the same) ... */
+
+.courses-table th, .courses-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+}
+
+/* --- THIS IS THE FIX --- */
+/* Add a color to the table data cells */
+.courses-table td {
+    color: var(--admin-text-dark);
+}
+/* --- END OF FIX --- */
+
+.courses-table thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid var(--admin-border-color);
+}
+/* ... (rest of the file remains the same) ... */
+
+.cancel-btn { background-color: #f1f1f1; color: var(--admin-text-dark); }
+.cancel-btn:hover { background-color: #e2e2e2; }
+
+.save-btn { background-color: var(--admin-primary); color: white; }
+.save-btn:hover { background-color: var(--admin-primary-hover); }

@@ -1,0 +1,104 @@
+package com.cognizant.ams.Model.DAO.ServiceImpl;
+
+import com.cognizant.ams.Model.BAO.StudentRegistrationDTO;
+import com.cognizant.ams.Model.BAO.StudentRegisterResponse;
+import com.cognizant.ams.Model.DAO.Services.StudentRegistrationService;
+import com.cognizant.ams.Model.POJO.AdmissionStatus;
+import com.cognizant.ams.Model.POJO.CourseMaster;
+import com.cognizant.ams.Model.POJO.StudentRegistration;
+import com.cognizant.ams.Model.POJO.UserLogin;
+import com.cognizant.ams.Model.Repositories.CourseMasterRepository;
+import com.cognizant.ams.Model.Repositories.StudentRegistrationRepository;
+import com.cognizant.ams.Utility.IDGenerator; // Import your ID Generator
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class StudentRegistrationServiceImpl implements StudentRegistrationService {
+
+    @Autowired
+    private StudentRegistrationRepository studentRepo;
+
+    @Autowired
+    private CourseMasterRepository courseRepo;
+
+    @Override
+    public StudentRegisterResponse registerStudent(StudentRegistrationDTO dto) {
+        CourseMaster course = courseRepo.findById(dto.getCourseID())
+                .orElseThrow(() -> new EntityNotFoundException("Course not found with ID: " + dto.getCourseID()));
+
+        // --- THIS LOGIC IS NOW CORRECTED ---
+        String studentId = IDGenerator.generateStudentID();
+        String userId = IDGenerator.generateUserID(); // Generate a separate User ID
+
+        UserLogin newUser = new UserLogin();
+        newUser.setUserID(userId); // Use the new User ID
+        newUser.setUsername(dto.getEmail());
+        newUser.setPassword("defaultPass123"); // Password should be hashed in a real app
+        newUser.setRole("Student");
+
+        StudentRegistration student = new StudentRegistration();
+        student.setStudentID(studentId); // Use the Student ID
+        student.setFirstName(dto.getFirstName());
+        student.setLastName(dto.getLastName());
+        student.setGender(dto.getGender());
+        student.setDob(dto.getDob());
+        student.setEmail(dto.getEmail());
+        student.setContactNumber(dto.getContactNumber());
+        student.setAddress(dto.getAddress());
+        student.setApplicationDate(LocalDate.now());
+        student.setCourse(course);
+        student.setUserLogin(newUser); // Link the new user login object
+
+        AdmissionStatus status = new AdmissionStatus();
+        status.setStudentID(studentId);
+        status.setStudentRegistration(student);
+        status.setCourse(course);
+        status.setStatus("Pending");
+        student.setAdmissionStatus(status);
+
+        studentRepo.save(student);
+
+        return new StudentRegisterResponse(studentId, newUser.getUsername(), newUser.getPassword());
+    }
+    
+    // ... (rest of the file remains the same) ...
+    @Override
+    public StudentRegistrationDTO getStudent(String studentID) {
+        StudentRegistration student = studentRepo.findById(studentID)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found with ID: " + studentID));
+        
+        StudentRegistrationDTO dto = new StudentRegistrationDTO();
+        dto.setStudentID(student.getStudentID());
+        dto.setFirstName(student.getFirstName());
+        dto.setLastName(student.getLastName());
+        dto.setGender(student.getGender());
+        dto.setDob(student.getDob());
+        dto.setEmail(student.getEmail());
+        dto.setContactNumber(student.getContactNumber());
+        dto.setAddress(student.getAddress());
+        dto.setCourseID(student.getCourse().getCourseID());
+        return dto;
+    }
+
+    @Override
+    public List<StudentRegistrationDTO> getAllStudents() {
+        return studentRepo.findAll().stream()
+                .map(this::toStudentDTO)
+                .collect(Collectors.toList());
+    }
+
+    private StudentRegistrationDTO toStudentDTO(StudentRegistration student) {
+        StudentRegistrationDTO dto = new StudentRegistrationDTO();
+        dto.setStudentID(student.getStudentID());
+        dto.setFirstName(student.getFirstName());
+        dto.setLastName(student.getLastName());
+        dto.setCourseID(student.getCourse().getCourseID());
+        // Map other fields as needed for the list view
+        return dto;
+    }
+}

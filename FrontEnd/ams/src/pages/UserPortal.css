@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --sidebar-bg: #111827;
+    --sidebar-text: #d1d5db;
+    --sidebar-active-bg: rgba(79, 70, 229, 0.2);
+    --sidebar-active-text: #ffffff;
+    --main-bg: #f9fafb;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --border-color: #e5e7eb;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.portal-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Poppins', sans-serif;
+    position: relative; 
+    z-index: 1;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    transition: width 0.3s ease;
+    z-index: 10;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+}
+
+.sidebar-header { margin-bottom: 2rem; text-align: center; }
+.sidebar-header h3 { font-size: 1.5rem; color: var(--sidebar-active-text); font-weight: 700; }
+.sidebar-nav { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+.sidebar-nav li {
+    display: flex; align-items: center; padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem; border-radius: 8px; cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.sidebar-nav li:hover { background-color: var(--sidebar-active-bg); color: var(--sidebar-active-text); }
+.sidebar-nav li.active {
+    background-color: var(--primary-color);
+    color: var(--sidebar-active-text);
+    font-weight: 600; box-shadow: var(--shadow);
+}
+.sidebar-nav li svg { width: 24px; height: 24px; margin-right: 1rem; fill: currentColor; }
+
+.sidebar-footer { padding-top: 1rem; border-top: 1px solid #374151; }
+.logout-btn {
+    display: flex; align-items: center; width: 100%;
+    padding: 0.8rem 1rem; background: none; border: none;
+    color: var(--sidebar-text); font-size: 1rem; text-align: left;
+    border-radius: 8px; cursor: pointer; transition: background-color 0.3s, color 0.3s;
+}
+.logout-btn:hover { background-color: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+.logout-btn svg { width: 24px; height: 24px; margin-right: 1rem; fill: currentColor; }
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    background-color: var(--main-bg); /* Restored solid background color */
+}

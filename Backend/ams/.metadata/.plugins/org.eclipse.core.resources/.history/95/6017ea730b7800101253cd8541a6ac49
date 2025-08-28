@@ -1,0 +1,13 @@
+package com.cognizant.ams.Model.DAO.Services;
+
+import com.cognizant.ams.Model.BAO.StudentRegisterResponse;
+import com.cognizant.ams.Model.BAO.StudentRegistrationDTO;
+
+import java.util.List;
+
+public interface StudentRegistrationService {
+    StudentRegisterResponse registerStudent(StudentRegistrationDTO dto);
+    StudentRegistrationDTO getStudent(String studentID);
+    List<StudentRegistrationDTO> getAllStudents();
+	
+}

@@ -1,0 +1,24 @@
+package com.cognizant.ams;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean; // Ee import ni add cheyandi
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; // Ee import ni add cheyandi
+import org.springframework.security.crypto.password.PasswordEncoder; // Ee import ni add cheyandi
+
+@SpringBootApplication
+@EnableDiscoveryClient
+public class AmsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AmsApplication.class, args);
+	}
+
+	// --- IDHE FINAL FIX ---
+	// Ee bean ni malli add cheyadam valla, mee application start avutundi.
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+}
