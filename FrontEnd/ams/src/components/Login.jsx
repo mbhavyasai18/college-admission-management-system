@@ -109,3 +109,5 @@ const Login = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgotPasswor
 };
 
 export default Login;
+
+//This is the login page
